@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.hw3.ui.theme.HW3Theme
-import com.example.hw3.ui.theme.StatusWorker
 import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
