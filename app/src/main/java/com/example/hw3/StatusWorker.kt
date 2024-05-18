@@ -1,4 +1,4 @@
-package com.example.hw3.ui.theme
+package com.example.hw3
 
 import android.content.Context
 import android.provider.Settings

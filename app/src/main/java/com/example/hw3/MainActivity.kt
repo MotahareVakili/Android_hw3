@@ -9,7 +9,6 @@ import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
 import com.example.hw3.ui.theme.HW3Theme
-import com.example.hw3.ui.theme.StatusWorker
 import java.util.concurrent.TimeUnit
 
 class MainActivity : ComponentActivity() {
