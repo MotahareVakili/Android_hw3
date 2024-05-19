@@ -57,11 +57,23 @@ class StatusWorker(private val appContext: Context, workerParams: WorkerParamete
     }
     private fun saveLogToFile(Context: Context,logObject: JSONObject = JSONObject()) {
 
-        val logArray = JSONArray().put(logObject)
         val logFile = File(Context.filesDir , "log.json")
 
-        logFile.appendText(logArray.toString() )
+        logFile.appendText(logObject.toString() )
         Log.d("status_path", "Log entries saved to: ${logFile.absolutePath}")
+
+        val jsonArray = if (logFile.exists()) {
+            val jsonString = logFile.readText()
+            JSONArray(jsonString)
+        } else {
+            JSONArray()
+        }
+
+        // Add the log object to the JSON array
+        jsonArray.put(logObject)
+
+        // Write the JSON array to the file
+        logFile.writeText(jsonArray.toString())
 
         // Print contents of the log file to Logcat
         val reader = BufferedReader(FileReader(logFile))

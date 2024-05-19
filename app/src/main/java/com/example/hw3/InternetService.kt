@@ -74,20 +74,32 @@ class InternetService: Service() {
     @SuppressLint("SuspiciousIndentation")
     private fun saveLogToFile(logObject: JSONObject = JSONObject()) {
 
-        val logArray = JSONArray().put(logObject)
-        val logFile = File(filesDir, "log.json")
+        val logFile = File(filesDir , "log.json")
 
-            logFile.appendText(logArray.toString() )
-            Log.d("HW3_part1", "Log entries saved to: ${logFile.absolutePath}")
+        logFile.appendText(logObject.toString() )
+        Log.d("status_path", "Log entries saved to: ${logFile.absolutePath}")
+
+        val jsonArray = if (logFile.exists()) {
+            val jsonString = logFile.readText()
+            JSONArray(jsonString)
+        } else {
+            JSONArray()
+        }
+
+        // Add the log object to the JSON array
+        jsonArray.put(logObject)
+
+        // Write the JSON array to the file
+        logFile.writeText(jsonArray.toString())
 
         // Print contents of the log file to Logcat
-            val reader = BufferedReader(FileReader(logFile))
-            var line: String? = reader.readLine()
-            while (line != null) {
-                Log.d("HW3_part1", line)
-                line = reader.readLine()
-            }
-            reader.close()
-    }
+        val reader = BufferedReader(FileReader(logFile))
+        var line: String? = reader.readLine()
+        while (line != null) {
+            Log.d("status", line)
+            line = reader.readLine()
+        }
+        reader.close()
 
+    }
 }
